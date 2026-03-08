@@ -8,7 +8,7 @@ O objetivo do sistema é permitir o gerenciamento de informações financeiras, 
 
 # 📚 Disciplina
 
-Projeto de Software
+Software Product Analysis,specification,Project e Implementation
 
 ---
 
