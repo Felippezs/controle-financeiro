@@ -14,8 +14,7 @@ Software Product Analysis, Specification, Project and Implementation
 
 # 👨‍💻 Aluno
 
-Felippe Pereira
-
+Felippe Pereira  
 RA: 2303780
 
 ---
@@ -42,20 +41,45 @@ Banco de Dados
 
 O sistema foi desenvolvido utilizando arquitetura de 3 camadas:
 
-Frontend (React)
-↓
-Backend (Node.js / Express)
-↓
+Frontend (React)  
+↓  
+Backend (Node.js / Express)  
+↓  
 Banco de Dados (PostgreSQL)
 
 ---
 
-# 🚀 Funcionalidades Implementadas (AC2)
+# 🚀 Funcionalidades Implementadas
+
+## AC1
+
+Nesta primeira entrega foram implementadas as seguintes funcionalidades:
+
+✔ Estrutura inicial do projeto  
+✔ Criação do backend com Node.js  
+✔ Conexão com banco de dados PostgreSQL  
+✔ API para cadastro de usuários  
+✔ Integração entre frontend e backend  
+✔ Persistência de dados no banco de dados  
+
+Fluxo da aplicação:
+
+Usuário preenche formulário  
+↓  
+Frontend envia requisição para API  
+↓  
+Backend processa a requisição  
+↓  
+Dados são armazenados no PostgreSQL  
+
+---
+
+## AC2
 
 Nesta segunda entrega foram implementadas as seguintes funcionalidades:
 
-✔ Cadastro de usuário  
-✔ Sistema de Login  
+✔ Sistema de Login de usuários  
+✔ Cadastro de novos usuários  
 ✔ Logout do usuário  
 ✔ Listagem de usuários cadastrados  
 ✔ Exclusão de usuários  
