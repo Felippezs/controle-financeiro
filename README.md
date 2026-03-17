@@ -69,6 +69,28 @@ Backend processa a requisição
         ↓
 Dados são armazenados no PostgreSQL
 ```
+# 🚀 Funcionalidades Implementadas (AC2)
+
+Nesta segunda entrega foram implementadas as seguintes funcionalidades:
+
+✔ Cadastro de usuário  
+✔ Sistema de Login  
+✔ Logout do usuário  
+✔ Listagem de usuários cadastrados  
+✔ Exclusão de usuários  
+✔ Integração entre frontend e backend  
+✔ Persistência dos dados no banco PostgreSQL  
+
+Fluxo da aplicação:
+Usuário realiza cadastro ou login
+↓
+Frontend envia requisição para API
+↓
+Backend processa a requisição
+↓
+Dados são armazenados ou consultados no PostgreSQL
+↓
+Informações são retornadas para o frontend
 
 ---
 
