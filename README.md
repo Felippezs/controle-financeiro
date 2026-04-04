@@ -100,6 +100,35 @@ Informações são retornadas para o frontend
 
 ---
 
+## AC3
+
+Nesta terceira entrega foram implementadas as seguintes funcionalidades:
+
+✔ Associação de transações ao usuário (user_id)  
+✔ Registro de receitas e despesas  
+✔ Listagem de transações por usuário  
+✔ Cálculo automático do saldo  
+✔ Separação entre receitas e despesas  
+✔ Exclusão de transações  
+✔ Validação de dados no formulário  
+✔ Garantia de que cada usuário visualiza apenas seus próprios dados  
+
+Fluxo da aplicação:
+
+Usuário realiza login  
+↓  
+Sistema identifica o usuário pelo ID  
+↓  
+Usuário registra uma transação (receita ou despesa)  
+↓  
+Backend salva a transação vinculada ao usuário  
+↓  
+Frontend busca apenas as transações daquele usuário  
+↓  
+Saldo é calculado automaticamente  
+
+---
+
 # 📂 Estrutura do Projeto
 
 controle-financeiro
@@ -193,5 +222,17 @@ id
 name  
 email  
 password  
+
+Tabela utilizada:
+
+transactions
+
+Campos da tabela:
+
+id  
+user_id  
+description  
+amount  
+type  
 
 ---
