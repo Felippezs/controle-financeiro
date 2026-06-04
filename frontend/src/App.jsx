@@ -12,7 +12,11 @@ function App() {
   const [descricao, setDescricao] = useState("");
   const [valor, setValor] = useState("");
   const [tipo, setTipo] = useState("receita");
-  const [transacoes, setTransacoes] = useState([]);
+  const [transacoes, setTransacoes] = useState([])
+  const [editandoId, setEditandoId] = useState(null);
+  const [editDescricao, setEditDescricao] = useState("");
+  const [editValor, setEditValor] = useState("");
+  const [editTipo, setEditTipo] = useState("");
 
   async function login() {
     try {
@@ -123,6 +127,7 @@ function App() {
     carregarTransacoes(userId);
   }
 
+
   async function carregarTransacoes(id) {
     const resposta = await fetch(`http://localhost:3000/transactions/${id}`);
     const dados = await resposta.json();
@@ -135,6 +140,30 @@ function App() {
     });
 
     carregarTransacoes(userId);
+  }
+
+  async function editarTransacao(id) {
+    const resposta = await fetch(
+      `http://localhost:3000/transactions/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          description: editDescricao,
+          amount: editValor,
+          type: editTipo,
+        }),
+      }
+    );
+
+    if (resposta.ok) {
+      setEditandoId(null);
+      carregarTransacoes(userId);
+    } else {
+      alert("Erro ao editar transação");
+    }
   }
 
   function sair() {
@@ -376,6 +405,7 @@ function App() {
             <br />
 
             <h3>Receitas</h3>
+
             {receitas.map((t) => (
               <div
                 key={t.id}
@@ -386,17 +416,72 @@ function App() {
                   padding: "5px",
                 }}
               >
-                <span>{t.description} - R$ {t.amount}</span>
-                <button
-                  onClick={() => deletarTransacao(t.id)}
-                  style={{ background: "red", color: "white", border: "none" }}
-                >
-                  Excluir
-                </button>
+                {editandoId === t.id ? (
+                  <>
+                    <input
+                      value={editDescricao}
+                      onChange={(e) => setEditDescricao(e.target.value)}
+                      style={{ width: "90px" }}
+                    />
+
+                    <input
+                      type="number"
+                      value={editValor}
+                      onChange={(e) => setEditValor(e.target.value)}
+                      style={{ width: "70px" }}
+                    />
+
+                    <button
+                      onClick={() => editarTransacao(t.id)}
+                      style={{
+                        background: "green",
+                        color: "white",
+                        border: "none",
+                      }}
+                    >
+                      Salvar
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <span>{t.description} - R$ {t.amount}</span>
+
+                    <div>
+                      <button
+                        onClick={() => {
+                          setEditandoId(t.id);
+                          setEditDescricao(t.description);
+                          setEditValor(t.amount);
+                          setEditTipo("receita");
+                        }}
+                        style={{
+                          background: "#2196F3",
+                          color: "white",
+                          border: "none",
+                          marginRight: "5px",
+                        }}
+                      >
+                        Editar
+                      </button>
+
+                      <button
+                        onClick={() => deletarTransacao(t.id)}
+                        style={{
+                          background: "red",
+                          color: "white",
+                          border: "none",
+                        }}
+                      >
+                        Excluir
+                      </button>
+                    </div>
+                  </>
+                )}
               </div>
             ))}
 
             <h3>Despesas</h3>
+
             {despesas.map((t) => (
               <div
                 key={t.id}
@@ -407,13 +492,67 @@ function App() {
                   padding: "5px",
                 }}
               >
-                <span>{t.description} - R$ {t.amount}</span>
-                <button
-                  onClick={() => deletarTransacao(t.id)}
-                  style={{ background: "red", color: "white", border: "none" }}
-                >
-                  Excluir
-                </button>
+                {editandoId === t.id ? (
+                  <>
+                    <input
+                      value={editDescricao}
+                      onChange={(e) => setEditDescricao(e.target.value)}
+                      style={{ width: "90px" }}
+                    />
+
+                    <input
+                      type="number"
+                      value={editValor}
+                      onChange={(e) => setEditValor(e.target.value)}
+                      style={{ width: "70px" }}
+                    />
+
+                    <button
+                      onClick={() => editarTransacao(t.id)}
+                      style={{
+                        background: "green",
+                        color: "white",
+                        border: "none",
+                      }}
+                    >
+                      Salvar
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <span>{t.description} - R$ {t.amount}</span>
+
+                    <div>
+                      <button
+                        onClick={() => {
+                          setEditandoId(t.id);
+                          setEditDescricao(t.description);
+                          setEditValor(t.amount);
+                          setEditTipo("despesa");
+                        }}
+                        style={{
+                          background: "#2196F3",
+                          color: "white",
+                          border: "none",
+                          marginRight: "5px",
+                        }}
+                      >
+                        Editar
+                      </button>
+
+                      <button
+                        onClick={() => deletarTransacao(t.id)}
+                        style={{
+                          background: "red",
+                          color: "white",
+                          border: "none",
+                        }}
+                      >
+                        Excluir
+                      </button>
+                    </div>
+                  </>
+                )}
               </div>
             ))}
           </div>

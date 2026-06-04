@@ -11,8 +11,6 @@ app.get("/", (req, res) => {
   res.send("API rodando");
 });
 
-/* ================= USUÁRIOS ================= */
-
 app.get("/users", async (req, res) => {
   try {
     const users = await pool.query("SELECT * FROM users ORDER BY id ASC");
@@ -76,8 +74,6 @@ app.delete("/users/:id", async (req, res) => {
   }
 });
 
-/* ================= TRANSAÇÕES ================= */
-
 app.get("/transactions/:user_id", async (req, res) => {
   const { user_id } = req.params;
 
@@ -99,7 +95,9 @@ app.post("/transactions", async (req, res) => {
 
   try {
     if (!user_id) {
-      return res.status(400).json({ message: "user_id não informado" });
+      return res.status(400).json({
+        message: "user_id não informado",
+      });
     }
 
     const tipoLimpo = type.trim().toLowerCase();
@@ -112,7 +110,33 @@ app.post("/transactions", async (req, res) => {
     res.json(nova.rows[0]);
   } catch (err) {
     console.error(err.message);
-    res.status(500).json({ message: "Erro ao salvar transação" });
+    res.status(500).json({
+      message: "Erro ao salvar transação",
+    });
+  }
+});
+
+app.put("/transactions/:id", async (req, res) => {
+  const { id } = req.params;
+  const { description, amount, type } = req.body;
+
+  try {
+    const result = await pool.query(
+      `UPDATE transactions
+       SET description = $1,
+           amount = $2,
+           type = $3
+       WHERE id = $4
+       RETURNING *`,
+      [description, amount, type, id]
+    );
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({
+      message: "Erro ao atualizar transação",
+    });
   }
 });
 
@@ -120,11 +144,19 @@ app.delete("/transactions/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
-    await pool.query("DELETE FROM transactions WHERE id = $1", [id]);
-    res.json({ message: "Transação deletada" });
+    await pool.query(
+      "DELETE FROM transactions WHERE id = $1",
+      [id]
+    );
+
+    res.json({
+      message: "Transação deletada",
+    });
   } catch (err) {
     console.error(err.message);
-    res.status(500).json({ message: "Erro ao deletar transação" });
+    res.status(500).json({
+      message: "Erro ao deletar transação",
+    });
   }
 });
 
