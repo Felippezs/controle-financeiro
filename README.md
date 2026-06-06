@@ -129,6 +129,36 @@ Saldo é calculado automaticamente
 
 ---
 
+## Entrega Final
+
+Nesta entrega final foram implementadas as seguintes funcionalidades:
+
+✔ Cadastro de usuários
+✔ Login de usuários
+✔ Logout
+✔ Registro de receitas
+✔ Registro de despesas
+✔ Saldo automático
+✔ Visualização de transações por usuário
+✔ Exclusão de transações
+✔ Edição de transações
+✔ Persistência dos dados no PostgreSQL
+✔ Isolamento dos dados por usuário
+
+Fluxo da aplicação:
+
+Usuário realiza login
+↓
+Sistema identifica o usuário
+↓
+Receitas e despesas são vinculadas ao usuário
+↓
+Saldo é calculado automaticamente
+↓
+Usuário pode editar ou excluir transações
+
+---
+
 # 📂 Estrutura do Projeto
 
 controle-financeiro
